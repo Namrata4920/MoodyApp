@@ -4,25 +4,37 @@ import {View,
     Text,
     StyleSheet,
     TouchableOpacity,
-    Dimensions} from 'react-native';
+    Dimensions,Image,KeyboardAvoidingView} from 'react-native';
 import FormInput from '../Components/Forminput';
 import FormButton from '../Components/Formbutton';
+import LinearGradient from 'react-native-linear-gradient';
 import { AuthContext } from '../navigation/AuthProvider';
 
 const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmpassword, setConfirmPassword] = useState();
+  const [enableshift , setenableShift] = useState(false);
 
   const {register} = useContext(AuthContext);
 
     return (
-        <View style={styles.mainBox}>
+        <LinearGradient style={styles.mainBox}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        colors={['#8894DB', '#EC91E5','#F2CE90']}>
+
+        <KeyboardAvoidingView behavior="padding" enabled={enableshift} style={{ flex: 1}}>
+          <View style={styles.container1}>
+            <Image source={require('../Images/HP.jpg')} style={styles.logo}/>
+          </View>
+
           <View style={styles.container}>
             <Text style={styles.text}>Create Account</Text>
             <FormInput
                 labelValue={email}
                 onChangeText={(userEmail) => setEmail(userEmail)}
+                onFocus={() => setenableShift(false)}
                 placeholderText="email"
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -31,12 +43,14 @@ const SignUpScreen = ({navigation}) => {
             <FormInput
                 labelValue={password}
                 onChangeText={(userpassword) => setPassword(userpassword)}
+                onFocus={() => setenableShift(false)}
                 placeholderText="password"
                 secureTextEntry={true}
             />
             <FormInput
                 labelValue={confirmpassword}
                 onChangeText={(userpassword) => setConfirmPassword(userpassword)}
+                onFocus={() => setenableShift(false)}
                 placeholderText=" Confirm password"
                 secureTextEntry={true}
             />
@@ -49,33 +63,45 @@ const SignUpScreen = ({navigation}) => {
               <Text style={styles.lastText}>already have an account! click here</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
+        </LinearGradient>
     );
 };
 
 export default SignUpScreen;
 
 const {height} = Dimensions.get('screen');
+const height_logo = height * 0.15;
 
 const styles = StyleSheet.create({
   mainBox: {
-    height: height,
-    backgroundColor:'lightblue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    flex: 1,
   },
-    container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 20,
-      paddingTop: 50,
-    },
+  container1: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:30,
+  },
     text: {
-      fontFamily: 'Kufam-SemiBoldItalic',
+      fontFamily: 'NotoSerif-BoldItalic',
       fontSize: 28,
-      marginBottom: 10,
+      marginBottom: 5,
       color: '#051d5f',
     },
+    logo: {
+      width: height_logo,
+      height: height_logo,
+      borderRadius: 100,
+    },
     navButton: {
-      marginTop: 15,
+      marginTop: 7,
     },
     navButtonText: {
       fontSize: 18,
@@ -91,7 +117,7 @@ const styles = StyleSheet.create({
     textPrivate: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginVertical: 35,
+        marginVertical: 20,
         justifyContent: 'center',
       },
       color_textPrivate: {

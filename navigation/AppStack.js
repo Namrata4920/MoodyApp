@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 
 const AppStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator headerMode="screen">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Gallery" component={Gallery} />
         </Stack.Navigator>

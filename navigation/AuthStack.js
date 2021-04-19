@@ -33,7 +33,7 @@ const AppStack = () => {
     return null;
   } else if (isFirstLaunch === true) {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator headerMode="none">
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
           <Stack.Screen name="SignInScreen" component={SignInScreen} />
           <Stack.Screen name="SignUpScreen" component={SignUpScreen} />

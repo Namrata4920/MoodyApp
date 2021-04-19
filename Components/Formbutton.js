@@ -20,7 +20,7 @@ export const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginTop: 10,
+    marginTop: 5,
     width: '100%',
     height: windowHeight / 15,
     alignItems: 'center',
